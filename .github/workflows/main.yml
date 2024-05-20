@@ -1,19 +1,43 @@
-name: dotnet package
-on: [push]
+name: Build and Deploy
 
-jobs: 
+on: [push, pull_request]
+
+jobs:
   build:
-
     runs-on: ubuntu-latest
-    strategy: 
-      matrix:
-        dotnet-version: [ '3.1.x', '6.0.x' ]
+
+    env:
+      BUILD_CONFIGURATION: 'Release'
 
     steps:
-      - uses: actions/checkout@v4
-      - name: Setup Dotnet ${{ matrix.dotnet-version }}
-        uses: actions/setup-dotnet@v3
-        with:
-          dotnet-version: ${{ matrix.dotnet-version }}
-      - name: Display dotnet version
-        run: dotnet --version
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    - name: Setup .NET SDK
+      uses: actions/setup-dotnet@v2
+      with:
+        dotnet-version: '6.x'
+
+    - name: Setup Node.js
+      uses: actions/setup-node@v2
+      with:
+        node-version: '14'
+
+    - name: Install NPM packages
+      run: npm install
+
+    - name: Compile Sass assets
+      run: ./node_modules/.bin/node-sass Tailspin.SpaceGame.Web/wwwroot --output Tailspin.SpaceGame.Web/wwwroot
+
+    - name: Run Gulp tasks
+      run: npm run gulp
+
+    - name: Write build info
+      run: echo "${{ github.workflow }}, ${{ github.run_id }}, ${{ github.run_number }}" > buildinfo.txt
+      working-directory: Tailspin.SpaceGame.Web/wwwroot
+
+    - name: Restore project dependencies
+      run: dotnet restore '**/*.csproj'
+
+    - name: Build the project - Release
+      run: dotnet build --no-restore --configuration Release '**/*.csproj'
