@@ -52,4 +52,4 @@ jobs:
       run: |
         cd Tailspin.SpaceGame.Web
         dotnet build --no-restore --configuration Release
-        dotnet publish --no-build --configuration Release --output '../dotnet-tailspin-spacegame
+        dotnet publish --no-build --configuration Release --output '../dotnet-tailspin-spacegame'
