@@ -46,8 +46,8 @@ jobs:
 
     - name: Restore project dependencies
       run: dotnet restore '**/*.csproj'
-      working-directory: TailSpin.SpaceGame.Web/
+      working-directory: ../TailSpin.SpaceGame.Web
 
     - name: Build the project - Release
       run: dotnet build --no-restore --configuration Release '**/*.csproj'
-      working-directory: TailSpin.SpaceGame.Web/
+      working-directory: ../TailSpin.SpaceGame.Web
