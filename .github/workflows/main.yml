@@ -48,10 +48,8 @@ jobs:
       run: dotnet restore 'Tailspin.SpaceGame.Web.csproj'
       working-directory: Tailspin.SpaceGame.Web
 
-    - name: Build the project - Release
-      run: dotnet build --no-restore --configuration Release 'Tailspin.SpaceGame.Web.csproj'
-      working-directory: Tailspin.SpaceGame.Web
-
-    - name: Publish project
-      run: dotnet publish --no-build --configuration Release --output '../dotnet-tailspin-spacegame 
-      
+    - name: Build and Publish the project - Release
+      run: |
+        cd Tailspin.SpaceGame.Web
+        dotnet build --no-restore --configuration Release
+        dotnet publish --no-build --configuration Release --output '../dotnet-tailspin-spacegame
