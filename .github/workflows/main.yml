@@ -44,10 +44,11 @@ jobs:
       run: echo "${{ github.workflow }}, ${{ github.run_id }}, ${{ github.run_number }}" > buildinfo.txt
       working-directory: Tailspin.SpaceGame.Web/wwwroot
 
+    - name: Show current directory
+      run: ls -al
+
     - name: Restore project dependencies
       run: dotnet restore '**/*.csproj'
-      working-directory: ../TailSpin.SpaceGame.Web
 
     - name: Build the project - Release
       run: dotnet build --no-restore --configuration Release '**/*.csproj'
-      working-directory: ../TailSpin.SpaceGame.Web
