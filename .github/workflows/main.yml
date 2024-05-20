@@ -26,9 +26,12 @@ jobs:
     - name: Install NPM packages
       run: npm install
 
+    - name: Install NPM packages
+      run: npm install -g gulp-cli
+
     - name: Compile Sass assets
       run: ./node_modules/.bin/node-sass Tailspin.SpaceGame.Web/wwwroot --output Tailspin.SpaceGame.Web/wwwroot
-
+          
     - name: Run Gulp tasks
       run: npm run gulp
 
