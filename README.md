@@ -1,3 +1,5 @@
+# Status
+[![Build and Deploy](https://github.com/coopereric/mslearn-tailspin-spacegame-web/actions/workflows/main.yml/badge.svg?branch=master)](https://github.com/coopereric/mslearn-tailspin-spacegame-web/actions/workflows/main.yml)
 
 # Contributing
 
