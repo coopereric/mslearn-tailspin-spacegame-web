@@ -26,13 +26,13 @@ jobs:
     - name: Install NPM packages
       run: npm install
 
-    - name: Install NPM packages
+    - name: Install Gulp
       run: |
         npm install -g gulp-cli
         npm install -g gulp
 
     - name: Show Gulp Version
-      run: gulp --ve
+      run: gulp -v
 
     - name: Compile Sass assets
       run: ./node_modules/.bin/node-sass Tailspin.SpaceGame.Web/wwwroot --output Tailspin.SpaceGame.Web/wwwroot
@@ -46,6 +46,8 @@ jobs:
 
     - name: Restore project dependencies
       run: dotnet restore '**/*.csproj'
+      working-directory: TailSpin.SpaceGame.Web/
 
     - name: Build the project - Release
       run: dotnet build --no-restore --configuration Release '**/*.csproj'
+      working-directory: TailSpin.SpaceGame.Web/
